@@ -11,6 +11,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Flix</h1>
+    </header>
+
+    <div class="content">
+      <%= yield %>
+    </div>
+
+    <footer>
+      <p>Daniel Havlin &copy; <%=Time.now.year %></p>
+    </footer>
   </body>
 </html>
