@@ -1,7 +1,7 @@
-<h1>Editing <%= @movie.title %></h1>
+<h1>Create A New Movie</h1>
 <%= form_with model: @movie do |form| %>
   <%= form.label :title %>
-  <%= form.text_field :title, autofocus: true %>
+  <%= form.text_field :title %>
 
   <%= form.label :description %>
   <%= form.text_area :description %>
@@ -10,7 +10,7 @@
   <%= form.text_field :rating %>
 
   <%= form.label :released_on %>
-  <%= form.date_select(:released_on, { start_year: 1920, end_year: Date.today.year }, {class: "date"}) %>
+  <%= form.date_select :released_on, { start_year: 1920, end_year: Date.today.year }, {class:"date"} %>
 
   <%= form.label :total_gross %>
   <%= form.number_field :total_gross  %>
