@@ -5,6 +5,10 @@
     </div>
     <h1><%= @movie.title %></h1>
     <h2><%= year_released @movie %> &bull;</h2>
+    <div class="reviews">
+      <%= link_to "See #{pluralize(@movie.reviews.size, 'Review')}", movie_reviews_path(@movie) %>
+      &bull; <%= pluralize(average_rating(@movie.reviews), 'Star') %>
+    </div>
     <p><%= @movie.description %></p>
     <table>
       <tr>
