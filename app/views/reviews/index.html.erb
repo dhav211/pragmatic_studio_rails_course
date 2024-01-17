@@ -6,6 +6,10 @@
             <%= render "shared/stars", percent: review.stars_as_percent %>
             <p><%= pluralize(review.stars, 'star') %> by <%= review.name %>: <%= review.comment %></p>
             <p>&bull; <%= time_ago_in_words(review.created_at) %> ago</p>
+            <span><%= link_to "Remove",  movie_review_path(@movie, review),
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%></span>
+            <span>&bull;</span>
+            <span><%= link_to "Edit", edit_movie_review_path(@movie, review) %></span>
         </li>
     <% end %>
 </ul>

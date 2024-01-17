@@ -4,11 +4,8 @@
       <%= image_tag @movie.image_file_name %>
     </div>
     <h1><%= @movie.title %></h1>
-    <h2><%= year_released @movie %> &bull;</h2>
-    <div class="reviews">
-      <%= link_to "See #{pluralize(@movie.reviews.size, 'Review')}", movie_reviews_path(@movie) %>
-      &bull; <%= pluralize(average_rating(@movie.reviews), 'Star') %>
-    </div>
+    <h2><%= year_released @movie %></h2>
+    <%= render "review_details" %>
     <p><%= @movie.description %></p>
     <table>
       <tr>
@@ -26,6 +23,9 @@
     </table>
   </div>
 </section>
+
+<p><h2> Write a Review </h2></p>
+<%= render "shared/review_form", movie: @movie, review: @review %>
 
 <section class="admin">
   <%= link_to "Edit", edit_movie_path(@movie), class:"button" %>
