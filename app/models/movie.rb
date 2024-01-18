@@ -17,7 +17,11 @@ class Movie < ApplicationRecord
   end
 
   def flop?
-    total_gross.blank? || total_gross < 225_000_000
+    (total_gross.blank? || total_gross < 225_000_000) && !cult_classic?
+  end
+
+  def cult_classic?
+    reviews.size > 50 && reviews.average >= 4
   end
 
   def reviewed?

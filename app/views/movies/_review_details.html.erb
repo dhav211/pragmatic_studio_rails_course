@@ -1,7 +1,7 @@
 <div class="reviews">
     <% if @movie.reviewed? %>
-        <%= link_to "See #{pluralize(@movie.reviews.size, 'Review')}", movie_reviews_path(@movie) %>
-        &bull; <%= pluralize(average_rating(@movie.reviews), 'Star') %>
+        <p><%= link_to "See #{pluralize(@movie.reviews.size, 'Review')}", movie_reviews_path(@movie) %></p>
+        <%= render "shared/stars", percent: average_rating_as_percent(@movie.reviews) %>
     <% else %>
         No Reviews yet, you should write one!
     <% end %>
