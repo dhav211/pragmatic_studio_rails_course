@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     @user = User.new allowed_user_params
 
     if @user.save
+      session[:user_id] = @user.id
       redirect_to users_url, notice: "#{@user.name} created an account"
     else
       render :new, status: :unprocessable_entity
