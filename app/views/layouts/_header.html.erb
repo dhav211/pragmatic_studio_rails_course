@@ -7,15 +7,14 @@
         </li>
     </ul>
     <ul class="right">
-        <li>
         <% if signed_in? %>
-            <%= link_to current_user.username, current_user %>
-            <%= link_to "Account Settings", edit_user_path(current_user)%>
+            <li><%= link_to current_user.username, current_user %></li>
+            <li><%= button_to "Account Settings", edit_user_path(current_user) %></li> 
+            <li><%= button_to "Sign Out", session_path, method: :delete %></li>
         <% else %>
-            <%= link_to 'Sign In', signin_path, class: "button" %>
-            <%= link_to 'Sign Up', signup_path, class: "button" %>
+            <li><%= link_to 'Sign In', signin_path, class: "button" %></li>
+            <li><%= link_to 'Sign Up', signup_path, class: "button" %></li>
         <% end %>
-        </li>
     </ul>
     </nav>
 </header>

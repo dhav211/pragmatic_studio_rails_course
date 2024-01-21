@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    # Don't need anything here
   end
 
   def create
@@ -14,5 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session[:user_id] = nil
+    redirect_to movies_url, status: :see_other, notice: "You successfully signed out"
   end
 end
