@@ -8,9 +8,19 @@ class ApplicationController < ActionController::Base
 
   def current_user?(user)
     user == current_user
-  end
+end
 
   helper_method :current_user?
+
+  def require_admin
+    redirect_to root_url, alert: 'For admin access only!' unless current_user_admin?
+  end
+
+  def current_user_admin?
+    current_user && current_user.admin?
+  end
+
+  helper_method :current_user_admin?
 
   def require_signin
     session[:intended_url] = request.url
