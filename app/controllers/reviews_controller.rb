@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-
+  before_action :require_signin, except: :index
   before_action :set_movie
 
   def index
@@ -12,6 +12,7 @@ class ReviewsController < ApplicationController
 
   def create
     @review = @movie.reviews.new allowed_review_params
+    @review.user = current_user
 
     if @review.save
       redirect_to movie_reviews_path(@movie), notice: 'Your review was submitted successfully!'
@@ -26,6 +27,7 @@ class ReviewsController < ApplicationController
 
   def update
     @review = @movie.reviews.find params[:id]
+
     if @review.update allowed_review_params
       redirect_to movie_reviews_path(@movie), notice: 'Review edited successfully!'
     else
@@ -45,7 +47,6 @@ class ReviewsController < ApplicationController
   end
 
   def allowed_review_params
-    params.require(:review).permit(:name, :stars, :comment)
+    params.require(:review).permit(:stars, :comment, :user)
   end
-
 end

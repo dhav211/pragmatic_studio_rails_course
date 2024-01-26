@@ -1,9 +1,6 @@
 <%= form_with(model: [movie, review]) do |form| %>
     <%= render "shared/errors", object: review %>
 
-    <%= form.label :name %>
-    <%= form.text_field :name, placeholder: "Your Name", autofocus: true %>
-
     <%= form.label :stars %>
     <% Review::STARS.each do |star| %>
         <span class="star">
