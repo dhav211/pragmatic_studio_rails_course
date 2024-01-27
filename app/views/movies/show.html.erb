@@ -2,6 +2,14 @@
   <div class="details">
     <div class="image">
       <%= image_tag @movie.image_file_name %>
+      <% if current_user %>
+        <div class="faves">
+          <%= fave_or_unfave_button(@movie, @favorite) %>
+          <div class="count">
+            <%= @movie.fans.size %>
+          </div>
+        </div>
+      <% end %>
     </div>
     <h1><%= @movie.title %></h1>
     <h2><%= year_released @movie %></h2>
@@ -22,6 +30,16 @@
       </tr>
     </table>
   </div>
+  <% if @fans.present? %>
+    <aside>
+      <h4>Fans</h4>
+      <ul>
+        <% @fans.each do |user| %>
+          <li><%= link_to user.username, user %></li>
+        <% end %>
+      </ul>
+    </aside>
+  <% end %>
 </section>
 
 <p><h2> Write a Review </h2></p>
