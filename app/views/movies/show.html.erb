@@ -30,16 +30,22 @@
       </tr>
     </table>
   </div>
-  <% if @fans.present? %>
-    <aside>
+  <aside>
+    <% if @fans.present? %>
       <h4>Fans</h4>
       <ul>
         <% @fans.each do |user| %>
           <li><%= link_to user.username, user %></li>
         <% end %>
       </ul>
-    </aside>
-  <% end %>
+    <% end %>
+    <h4>Genres</h4>
+    <ul>
+      <% @genres.each do |genre| %>
+        <li><%= genre.name %></li>
+      <% end %>
+    </ul>
+  </aside>
 </section>
 
 <p><h2> Write a Review </h2></p>
