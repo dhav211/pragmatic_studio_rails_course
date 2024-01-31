@@ -1,13 +1,13 @@
 class MoviesController < ApplicationController
   before_action :require_signin, except: [:index, :show]
   before_action :require_admin, except: [:index, :show]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   def index
     @movies = Movie.send(movies_filter)
   end
 
   def show
-    @movie = Movie.find params[:id]
     @review = Review.new
     @fans = @movie.fans
     @favorite = current_user.favorites.find_by movie_id: @movie.id if current_user
@@ -15,11 +15,10 @@ class MoviesController < ApplicationController
   end
 
   def edit
-    @movie = Movie.find params[:id]
+    # Empty for time being, before-action set_movie is doing all the work
   end
 
   def update
-    @movie = Movie.find params[:id]
     if @movie.update(allowed_movie_params)
       redirect_to @movie, notice: 'Movie updated successfully'
     else
@@ -41,12 +40,15 @@ class MoviesController < ApplicationController
   end
 
   def destroy
-    @movie = Movie.find params[:id]
     @movie.destroy
     redirect_to movies_url, status: :see_other
   end
 
   private
+
+  def set_movie
+    @movie = Movie.find_by! slug: params[:id]
+  end
 
   def allowed_movie_params
     params.require(:movie)
